@@ -4,9 +4,73 @@
   justify-content: space-evenly;
 }
 
+.kartu {
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
 
-.rare p {
+.kartu:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.rare {
+  background-color:blue;
+}
+
+.rare img {
+  width: 90%;
+  height: 60%;
+}
+
+.rare .card-body p{
   text-align: center;
-  color: white;
-  
+  color: white
+}
+
+.sr {
+  background-color: purple;
+}
+
+.sr img {
+  width: 90%;
+  height: 60%;
+}
+
+.sr .card-body p {
+  text-align: center;
+  color: white
+}
+
+.ssr {
+  background-color: orange;
+}
+
+.ssr img {
+  width: 90%;
+  height: 60%;
+}
+
+.ssr .card-body p {
+  text-align: center;
+  color: black
+}
+
+.exclusive {
+  background-color: orangered;
+}
+
+.exclusive img {
+  width: 90%;
+  height: 60%;
+}
+
+.exclusive .card-body p {
+  text-align: center;
+  color: black
 }
