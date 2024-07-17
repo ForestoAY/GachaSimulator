@@ -88,14 +88,13 @@
 }
 
 /* Untuk page TopUp */
-.container{
+.container-topup{
   background: #ffffff;
   padding: 20px;
-  margin-top: 100px;
+  margin: 100px 250px ;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  max-width: 400px;
-  width: 100%;
+  width: 75%;
   text-align: center;
 }
 
@@ -106,7 +105,7 @@
   justify-content: space-between;
 }
 
-.card {
+.card-topup {
   width: 25%;
   padding: 25px;
   margin: 10px 25px 10px 25px;
@@ -117,16 +116,16 @@
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.card h3 {
+.card-topup h3 {
   margin: 0;
 }
 
-.card:hover {
+.card-topup:hover {
   background-color: #0d6efd;
   color: white;
 }
 
-.card.selected {
+.card-topup.selected {
   background-color: #0d6efd;
   color: white;
   border-color: #0d6efd;
