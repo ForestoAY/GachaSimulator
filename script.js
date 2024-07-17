@@ -1,33 +1,35 @@
 let gachaItem = [
   {
-    nama: "R",
+    nama: "Caterpie",
     rarity: 70,
-    linkGambar: "https://cdn-icons-png.flaticon.com/512/4553/4553016.png",
+    linkGambar:
+      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892132-010caterpie.png",
     id: 1,
   },
   {
-    nama: "SR",
+    nama: "Ponyta",
     rarity: 20,
-    linkGambar: "https://img.lovepik.com/element/45016/3146.png_860.png",
+    linkGambar:
+      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892309-077ponyta.png",
     id: 2,
   },
   {
-    nama: "SSR",
+    nama: "Voltorb",
     rarity: 8,
     linkGambar:
-      "https://pbs.twimg.com/profile_images/1667097609624866816/GQmBXyII_400x400.jpg",
+      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892678-100voltorb.png",
     id: 3,
   },
   {
-    nama: "EX",
+    nama: "Lapras",
     rarity: 2,
     linkGambar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIVZKlV_rZdJ4bvLs1FyrmPL5YpV3A9pihrA&s",
+      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1891870-131lapras.png",
     id: 4,
   },
 ];
 
-function render(array) {
+function renderGachaItem(array) {
   let itemList = document.getElementById("itemList");
   itemList.innerHTML = "";
 
@@ -37,19 +39,21 @@ function render(array) {
     let { nama, rarity, linkGambar, id } = perCharacter;
 
     if (rarity >= 70) {
-      frame = "rare";
+      frame = "common";
     } else if (rarity >= 20) {
-      frame = "sr";
+      frame = "rare";
     } else if (rarity >= 8) {
-      frame = "ssr";
+      frame = "sr";
     } else if (rarity <= 2) {
-      frame = "exclusive";
+      frame = "ssr";
     }
 
     itemList.innerHTML += `
     <div class="kartu ${frame}" style="width: 10rem;">
-      <img src="${linkGambar}" class="card-img-top" alt="${nama}">
-      <div class="card-body">
+      <div class="gambar">
+        <img src="${linkGambar}" class="card-img-top" alt="${nama}">
+      </div>
+      <div class="card-text">
         <p>${nama}</p>
         <p>${rarity}</p>
       </div>
@@ -57,30 +61,4 @@ function render(array) {
   }
 }
 
-document.getElementById("gachaButton").addEventListener("click", function() {
- 
-  const randomIndex = Math.floor(Math.random() * gachaItem.length);
-  const pulledItem = gachaItem[randomIndex];
-
-  const resultDiv = document.getElementById("result");
-  resultDiv.innerHTML = `
-    <div class="alert alert-info" role="alert">
-      You pulled: <strong>${pulledItem.nama}</strong> (${pulledItem.rarity})
-      <img src="${pulledItem.linkGambar}" alt="${pulledItem.nama}" style="width: 50px; height: 50px;">
-    </div>`;
-  
-  const itemList = document.getElementById("itemList");
-  const itemElement = document.createElement("div");
-  itemElement.classList.add("card", "m-2");
-  itemElement.style.width = "10rem";
-  itemElement.innerHTML = `
-    <img src="${pulledItem.linkGambar}" class="card-img-top" alt="${pulledItem.nama}">
-    <div class="card-body">
-      <p>${pulledItem.nama}</p>
-      <p>${pulledItem.rarity}</p>
-    </div>
-  `;
-  itemList.appendChild(itemElement);
-});
-
-render(gachaItem);
+renderGachaItem(gachaItem);
