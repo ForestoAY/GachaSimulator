@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gacha Simulator</title>
+    <title>Top Up Credit</title>
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -13,7 +13,7 @@
     />
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark ">
+    <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand">Gacha Simulator</a>
         <form class="d-flex" role="search">
@@ -27,35 +27,36 @@
         </form>
       </div>
     </nav>
-
-    <div class="container-topup">
-    <h2>Topup Credit</h2>
-        <div id="topupSection">
-            <div class="card-topup" data-value="10">
-                <h3>10 Credits</h3>
-            </div>
-            <div class="card-topup" data-value="20">
-                <h3>20 Credits</h3>
-            </div>
-            <div class="card-topup" data-value="50">
-                <h3>50 Credits</h3>
-            </div>
-            <div class="card-topup" data-value="100">
-                <h3>100 Credits</h3>
-            </div>
-            <div class="card-topup" data-value="250">
-                <h3>250 Credits</h3>
-            </div>
-            <div class="card-topup" data-value="500">
-                <h3>500 Credits</h3>
-            </div>
-            <button id="topupBtn">Topup</button>
+    <div class="container-topup mt-4">
+      <h2>Top Up Credit</h2>
+      <div id="topupSection">
+        <div class="card-topup" data-value="10">
+          <h3>10 Credits</h3>
         </div>
+        <div class="card-topup" data-value="20">
+          <h3>20 Credits</h3>
+        </div>
+        <div class="card-topup" data-value="50">
+          <h3>50 Credits</h3>
+        </div>
+        <div class="card-topup" data-value="100">
+          <h3>100 Credits</h3>
+        </div>
+        <div class="card-topup" data-value="250">
+          <h3>250 Credits</h3>
+        </div>
+        <div class="card-topup" data-value="500">
+          <h3>500 Credits</h3>
+        </div>
+      </div>
+      <div class="button-container mt-4">
+        <button id="topupBtn" class="btn btn-primary btn-common">Top Up</button>
+        <a href="index.html" class="btn btn-danger btn-cancel btn-common">Cancel Top Up</a>
+      </div>
     </div>
-
-
-    <script src="script.js" type="text/javascript"></script>
-    <script src="gachaItem.js" type="text/javascript"></script>
     <script src="topUp.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+AMvyTG7Sk6xggpq2U5Q/0MKPe2dy" 
+    crossorigin="anonymous"></script>
   </body>
 </html>

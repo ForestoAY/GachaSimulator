@@ -125,3 +125,9 @@ function updateGachaHistories(array) {
 
 let gachaButton = document.getElementById("gachaButton");
 gachaButton.addEventListener("click", gacha);
+
+// click top up
+let topUpButton = document.getElementById("topUpButton");
+topUpButton.addEventListener("click", function() {
+  window.location.href = "topup-credit.html";
+});
