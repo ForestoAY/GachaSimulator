@@ -1,0 +1,12 @@
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+
+.rare p {
+  text-align: center;
+  color: white;
+  
+}
