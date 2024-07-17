@@ -6,12 +6,12 @@
 
 .kartu {
   box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
+  transition: 0.3s;
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
 
 .kartu:hover {
@@ -19,16 +19,42 @@
   transform: scale(1.1);
 }
 
+.gambar {
+  display: flex;
+  height: 80%;
+  width: 95%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin-top: 8px;
+  border-radius: 5px;
+}
+
+.common {
+  background-color:grey;
+}
+
+.common img {
+  width: 95%;
+  height: 100%;
+}
+
+.common .card-text p{
+  text-align: center;
+  color: white
+}
+
 .rare {
-  background-color:blue;
+  background-color: blue;
 }
 
 .rare img {
-  width: 90%;
-  height: 60%;
+  width: 95%;
+  height: 100%;
 }
 
-.rare .card-body p{
+.rare .card-text p {
   text-align: center;
   color: white
 }
@@ -38,11 +64,11 @@
 }
 
 .sr img {
-  width: 90%;
-  height: 60%;
+  width: 95%;
+  height: 100%;
 }
 
-.sr .card-body p {
+.sr .card-text p {
   text-align: center;
   color: white
 }
@@ -52,25 +78,11 @@
 }
 
 .ssr img {
-  width: 90%;
-  height: 60%;
+  width: 95%;
+  height: 100%;
 }
 
-.ssr .card-body p {
-  text-align: center;
-  color: black
-}
-
-.exclusive {
-  background-color: orangered;
-}
-
-.exclusive img {
-  width: 90%;
-  height: 60%;
-}
-
-.exclusive .card-body p {
+.ssr .card-text p {
   text-align: center;
   color: black
 }
