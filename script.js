@@ -47,4 +47,30 @@ function render(array) {
   }
 }
 
+document.getElementById("gachaButton").addEventListener("click", function() {
+ 
+  const randomIndex = Math.floor(Math.random() * gachaItem.length);
+  const pulledItem = gachaItem[randomIndex];
+
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = `
+    <div class="alert alert-info" role="alert">
+      You pulled: <strong>${pulledItem.nama}</strong> (${pulledItem.rarity})
+      <img src="${pulledItem.linkGambar}" alt="${pulledItem.nama}" style="width: 50px; height: 50px;">
+    </div>`;
+  
+  const itemList = document.getElementById("itemList");
+  const itemElement = document.createElement("div");
+  itemElement.classList.add("card", "m-2");
+  itemElement.style.width = "10rem";
+  itemElement.innerHTML = `
+    <img src="${pulledItem.linkGambar}" class="card-img-top" alt="${pulledItem.nama}">
+    <div class="card-body">
+      <p>${pulledItem.nama}</p>
+      <p>${pulledItem.rarity}</p>
+    </div>
+  `;
+  itemList.appendChild(itemElement);
+});
+
 render(gachaItem);
