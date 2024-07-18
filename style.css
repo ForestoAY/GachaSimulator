@@ -4,8 +4,22 @@
   justify-content: space-evenly;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 h2 {
   margin-left: 4rem;
+}
+
+#topUpButton{
+  width: 8rem;
+}
+
+#gachaButton {
+  margin: 2rem auto;
+  font-size: 2rem;
 }
 
 #addItem {
@@ -32,6 +46,7 @@ h2 {
 
 .container-history {
   display: flex;
+  margin-top: 1.5rem;
 }
 
 .container-history button {
@@ -115,13 +130,22 @@ h2 {
 
 /* Untuk page TopUp */
 .balance-container {
+  display: flex;
   background-color: rgba(74, 189, 70, 0.5);
   margin-left: auto;
   margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   color: white;
-  border-radius: 2px;
+  border-radius: 10px;
   width: auto;
   height: auto;
+}
+
+.balance-container img {
+  width: 20px;
+  height: 20px;
+  margin: auto 5px auto auto;
 }
 
 .container-topup {
