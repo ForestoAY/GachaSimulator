@@ -123,15 +123,21 @@ function updateGachaHistories(array) {
   }
 }
 
-function addNewGacha(){
+function addNewGacha() {
   const newItemName = document.getElementById("newItemName");
   const newItemRate = document.getElementById("newItemRate");
   const newItemLink = document.getElementById("newItemLink");
   let itemName = newItemName.value.trim();
   let itemRate = Number(newItemRate.value.trim());
   let itemLink = newItemLink.value.trim();
-  if (itemName && !isNaN(itemRate) && itemRate > 0 && itemRate <= 100) {
-    gachaItems.push({ nama: itemName, rate: itemRate, linkGambar: itemLink});
+  if (
+    itemName &&
+    !isNaN(itemRate) &&
+    itemRate > 0 &&
+    itemRate <= 100 &&
+    itemLink
+  ) {
+    gachaItems.push({ nama: itemName, rate: itemRate, linkGambar: itemLink });
     newItemName.value = "";
     newItemRate.value = "";
     newItemLink.value = "";
