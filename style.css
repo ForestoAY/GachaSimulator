@@ -30,6 +30,14 @@ h2 {
   justify-content: center;
 }
 
+.container-history {
+  display: flex;
+}
+
+.container-history button {
+  margin-left: 1rem;
+}
+
 .description {
   align-self: center;
   margin-left: 2rem;
@@ -68,11 +76,6 @@ h2 {
   background-color: grey;
 }
 
-.common img {
-  width: 95%;
-  height: 100%;
-}
-
 .common .card-text p {
   text-align: center;
   color: white;
@@ -80,11 +83,6 @@ h2 {
 
 .rare {
   background-color: rgb(51, 51, 241);
-}
-
-.rare img {
-  width: 95%;
-  height: 100%;
 }
 
 .rare .card-text p {
@@ -96,11 +94,6 @@ h2 {
   background-color: purple;
 }
 
-.sr img {
-  width: 95%;
-  height: 100%;
-}
-
 .sr .card-text p {
   text-align: center;
   color: white;
@@ -110,18 +103,27 @@ h2 {
   background-color: orange;
 }
 
-.ssr img {
-  width: 95%;
-  height: 100%;
-}
-
 .ssr .card-text p {
   text-align: center;
   color: black;
 }
 
+.edit-delete {
+  margin-bottom: 0.3rem;
+}
+
 
 /* Untuk page TopUp */
+.balance-container {
+  background-color: rgba(74, 189, 70, 0.5);
+  margin-left: auto;
+  margin-right: 10px;
+  color: white;
+  border-radius: 2px;
+  width: auto;
+  height: auto;
+}
+
 .container-topup {
   background: #ffffff;
   padding: 20px;

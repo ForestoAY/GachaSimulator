@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+    let balanceId = document.getElementById("balance");
     let topupCards = document.getElementsByClassName("card-topup");
     let topupButton = document.getElementById("topupBtn");
     let selectedValue = null;
+
+    let balance = parseInt(localStorage.getItem("balance")) || 0;
+    updateBalance();
   
     for (let i = 0; i < topupCards.length; i++) {
       topupCards[i].addEventListener("click", function () {
@@ -15,18 +19,36 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedValue = this.getAttribute("data-value");
       });
     }
-  
-    // Masih belum pakai sweet alert
+
     topupButton.addEventListener("click", function () {
       if (selectedValue) {
-        alert(`Topup successful! You have added ${selectedValue} credits.`);
-        // tinggal tambahin proses buat nambahin value nya
-        window.location.href = "index.html"; // balik ke main page
+        let topupAmount = parseInt(selectedValue);
+        balance += topupAmount;
+        localStorage.setItem("balance", balance);
+        updateBalance();
+
+        Swal.fire({
+          title: 'Top-Up successful!',
+          text: `You have added ${selectedValue} credits.`,
+          icon: 'success',
+          confirmButtonText: 'OK'
+      }).then(() => {
+          window.location.href = "index.html";// balik ke main page
+      });
       } else {
-        alert("Please select a topup card first.");
+        Swal.fire({
+          title: 'Error!',
+          text: 'Please select a topup card first.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+      });
       }
     });
+    function updateBalance(){
+      balanceId.textContent = balance;
+    }
   });
 
   const audio = document.getElementById('backgroundMusic');
+
   
