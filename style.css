@@ -22,7 +22,19 @@ h2 {
   width: 8rem;
 }
 
+.gacha-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem; 
+}
+
 #gachaButton {
+  margin: 2rem auto;
+  font-size: 2rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+#gacha10Button {
   margin: 2rem auto;
   font-size: 2rem;
   font-family: "Montserrat", sans-serif;
@@ -46,7 +58,9 @@ h2 {
 
 #result {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 0.5rem;
 }
 
 .container-history {

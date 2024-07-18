@@ -54,7 +54,7 @@ function gacha() {
   if (balance < gachaCost) {
     Swal.fire({
       title: "Error!",
-      text: `You need at least ${gachaCost} credits to play gacha.`,
+      text: `You need at least ${gachaCost} credits to play a gacha.`,
       icon: "error",
       confirmButtonText: "OK",
     });
@@ -85,6 +85,60 @@ function gacha() {
       }
       randomNum -= gachaItem.rate;
     }
+  } else {
+    let resultDiv = document.getElementById("result");
+    resultDiv.querySelector(".description").innerText = "No items available!";
+  }
+}
+
+function gacha10() {
+  let balance = parseInt(localStorage.getItem("balance")) || 0;
+  const gachaCost = 10 * 10; // biaya 10x gacha
+
+  if (balance < gachaCost) {
+    Swal.fire({
+      title: "Error!",
+      text: `You need at least ${gachaCost} credits to play 10x gacha.`,
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+    return;
+  }
+
+  // Deduct credits before performing gacha
+  balance -= gachaCost;
+  localStorage.setItem("balance", balance);
+  updateBalance();
+
+  let results = [];
+  for (let i = 0; i < 10; i++) {
+    if (gachaItems.length > 0) {
+      let totalRate = gachaItems.reduce(
+        (sum, gachaItem) => sum + gachaItem.rate,
+        0
+      );
+      let randomNum = Math.random() * totalRate;
+      for (let gachaItem of gachaItems) {
+        if (randomNum < gachaItem.rate) {
+          results.push(gachaItem);
+          historyItems.unshift(gachaItem);
+          break;
+        }
+        randomNum -= gachaItem.rate;
+      }
+    }
+  }
+
+  if (results.length > 0) {
+    let resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = "";
+    results.forEach((item) => {
+      resultDiv.innerHTML += `
+        <img src="${item.linkGambar}" style="width: 100px; height: 100px" alt="${item.nama}" />
+        <div class="description">${item.nama}</div>`;
+    });
+    saveToLocal("localHistory", historyItems);
+    updateGachaHistories(historyItems);
   } else {
     let resultDiv = document.getElementById("result");
     resultDiv.querySelector(".description").innerText = "No items available!";
@@ -302,6 +356,8 @@ updateGachaHistories(historyItems);
 /// button di index \\\
 let gachaButton = document.getElementById("gachaButton");
 gachaButton.addEventListener("click", gacha);
+let gacha10Button = document.getElementById("gacha10Button");
+gacha10Button.addEventListener("click", gacha10);
 let addItemButton = document.getElementById("addItemButton");
 addItemButton.addEventListener("click", addNewGacha);
 let resetButton = document.getElementById("resetButton");
