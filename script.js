@@ -185,15 +185,81 @@ function deleteGacha(id) {
 }
 
 function editGacha(id) {
-  const newName = prompt("Enter new name:", gachaItems[id - 1].nama);
-  const newRate = prompt("Enter new rate (1-100):", gachaItems[id - 1].rate);
-  const newLink = prompt("Enter new link", gachaItems[id - 1].linkGambar);
-  if (newName && newRate && !isNaN(newRate) && newRate > 0 && newRate <= 100) {
-    gachaItems[id - 1].nama = newName;
-    gachaItems[id - 1].rate = Number(newRate);
-    gachaItems[id - 1].linkGambar = newLink;
-    renderGachaItem(gachaItems);
-  }
+  const item = gachaItems[id - 1];
+
+  Swal.fire({
+    title: 'Enter new name:',
+    input: 'text',
+    inputValue: item.nama,
+    showCancelButton: true,
+    confirmButtonText: 'Next',
+    showLoaderOnConfirm: true,
+    preConfirm: (newName) => {
+      if (!newName) {
+        Swal.showValidationMessage('Name is required');
+        return false;
+      }
+      return newName;
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const newName = result.value;
+
+      Swal.fire({
+        title: 'Enter new rate (1-100):',
+        input: 'number',
+        inputValue: item.rate,
+        showCancelButton: true,
+        confirmButtonText: 'Next',
+        showLoaderOnConfirm: true,
+        preConfirm: (newRate) => {
+          if (!newRate || isNaN(newRate) || newRate <= 0 || newRate > 100) {
+            Swal.showValidationMessage('Please enter a valid rate between 1 and 100');
+            return false;
+          }
+          return newRate;
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const newRate = result.value;
+
+          Swal.fire({
+            title: 'Enter new link:',
+            input: 'text',
+            inputValue: item.linkGambar,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            showLoaderOnConfirm: true,
+            preConfirm: (newLink) => {
+              if (!newLink) {
+                Swal.showValidationMessage('Link is required');
+                return false;
+              }
+              return newLink;
+            }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const newLink = result.value;
+
+              // Update gacha item
+              item.nama = newName;
+              item.rate = Number(newRate);
+              item.linkGambar = newLink;
+
+              // Re-render gacha items
+              renderGachaItem(gachaItems);
+
+              Swal.fire({
+                title: 'Success!',
+                text: 'Gacha item updated successfully.',
+                icon: 'success'
+              });
+            }
+          });
+        }
+      });
+    }
+  });
 }
 
 function reset() {
