@@ -263,6 +263,8 @@ function reset() {
     confirmButtonText: "RESET!",
   }).then((result) => {
     if (result.isConfirmed) {
+      let resultDiv = document.getElementById("result");
+      resultDiv.innerHTML = "";
       historyItems = [];
       saveToLocal("localHistory", historyItems);
       updateGachaHistories(historyItems);
