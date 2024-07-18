@@ -10,6 +10,9 @@ function loadFromLocal(key) {
 let gachaItems = loadFromLocal("localGacha");
 let historyItems = loadFromLocal("localHistory");
 
+const itemsPerPage = 6; // change history per page here
+let currentPage = 1;
+
 function renderGachaItem(array) {
   let gachaList = document.getElementById("gachaList");
   gachaList.innerHTML = "";
@@ -46,7 +49,69 @@ function renderGachaItem(array) {
   }
 }
 
-// spending per gacha. change here
+function renderGachaHistoriesPage(page) { // gacha history page from here
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const pageItems = historyItems.slice(start, end);
+
+  let gachaHistories = document.getElementById("gachaHistories");
+  gachaHistories.innerHTML = "";
+
+  pageItems.forEach(item => {
+    let frame;
+    const { nama, rate, linkGambar } = item;
+
+    if (rate >= 30) frame = "common";
+    else if (rate >= 10) frame = "rare";
+    else if (rate > 2) frame = "sr";
+    else frame = "ssr";
+
+    gachaHistories.innerHTML += `
+      <div class="kartu ${frame}" style="width: 10rem;">
+        <div class="gambar">
+          <img src="${linkGambar}" class="card-img-top" alt="${nama}">
+        </div>
+        <div class="card-text">
+          <p>${nama}</p>
+          <p>${frame.toUpperCase()}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  updatePaginationControls();
+}
+
+function updatePaginationControls() {
+  const totalPages = Math.ceil(historyItems.length / itemsPerPage);
+  document.getElementById("currentPage").innerText = currentPage;
+  
+  document.getElementById("prevPage").disabled = currentPage === 1;
+  document.getElementById("nextPage").disabled = currentPage === totalPages;
+}
+
+document.getElementById("prevPage").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderGachaHistoriesPage(currentPage);
+  }
+});
+
+document.getElementById("nextPage").addEventListener("click", () => {
+  const totalPages = Math.ceil(historyItems.length / itemsPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderGachaHistoriesPage(currentPage);
+  }
+});
+
+function updateGachaHistories(array) {
+  historyItems = array;
+  saveToLocal("localHistory", historyItems);
+  renderGachaHistoriesPage(currentPage);
+}
+
+// gacha cost
 function gacha() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
   const gachaCost = 50; // change gacha cost here
@@ -61,25 +126,20 @@ function gacha() {
     return;
   }
 
-  // Deduct credits before performing gacha
   balance -= gachaCost;
   localStorage.setItem("balance", balance);
   updateBalance();
 
   if (gachaItems.length > 0) {
-    let totalRate = gachaItems.reduce(
-      (sum, gachaItem) => sum + gachaItem.rate,
-      0
-    );
+    let totalRate = gachaItems.reduce((sum, item) => sum + item.rate, 0);
     let randomNum = Math.random() * totalRate;
+
     for (let gachaItem of gachaItems) {
       if (randomNum < gachaItem.rate) {
         historyItems.unshift(gachaItem);
         let resultDiv = document.getElementById("result");
-        resultDiv.innerHTML = "";
         resultDiv.innerHTML = `<img src="${gachaItem.linkGambar}" style="width: 200px; height: 200px" alt="${gachaItem.nama}" />
         <div class="description">You got ${gachaItem.nama}</div>`;
-        saveToLocal("localHistory", historyItems);
         updateGachaHistories(historyItems);
         return;
       }
@@ -93,7 +153,7 @@ function gacha() {
 
 function gacha10() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
-  const gachaCost = 10 * 10; // biaya 10x gacha
+  const gachaCost = 10 * 50; // biaya 10x gacha
 
   if (balance < gachaCost) {
     Swal.fire({
@@ -105,7 +165,7 @@ function gacha10() {
     return;
   }
 
-  // Deduct credits before performing gacha
+  // minus credits before  gacha
   balance -= gachaCost;
   localStorage.setItem("balance", balance);
   updateBalance();
@@ -145,38 +205,6 @@ function gacha10() {
   }
 }
 
-function updateGachaHistories(array) {
-  let gachaHistories = document.getElementById("gachaHistories");
-  gachaHistories.innerHTML = "";
-
-  for (let i = 0; i < array.length; i++) {
-    let perItem = array[i];
-    let frame;
-    let { nama, rate, linkGambar, id } = perItem;
-
-    if (rate >= 30) {
-      frame = "common";
-    } else if (rate >= 10) {
-      frame = "rare";
-    } else if (rate > 2) {
-      frame = "sr";
-    } else if (rate <= 2) {
-      frame = "ssr";
-    }
-
-    gachaHistories.innerHTML += `
-    <div class="kartu ${frame}" style="width: 10rem;">
-      <div class="gambar">
-        <img src="${linkGambar}" class="card-img-top" alt="${nama}">
-      </div>
-      <div class="card-text">
-        <p>${nama}</p>
-        <p>${frame.toUpperCase()}</p>
-      </div>
-    </div>`;
-  }
-}
-
 function addNewGacha() {
   const newItemName = document.getElementById("newItemName");
   const newItemRate = document.getElementById("newItemRate");
@@ -206,7 +234,6 @@ function addNewGacha() {
 }
 
 function deleteGacha(id) {
-  // Sweet Alert
   Swal.fire({
     title: `Would you like to delete ${
       gachaItems.find((item) => item.id === id).nama
@@ -225,7 +252,6 @@ function deleteGacha(id) {
       saveToLocal("localGacha", gachaItems);
     }
   });
-
 }
 
 function editGacha(id) {
@@ -287,7 +313,6 @@ function editGacha(id) {
             if (result.isConfirmed) {
               const newLink = result.value;
 
-              // update gacha item
               item.nama = newName;
               item.rate = Number(newRate);
               item.linkGambar = newLink;
@@ -309,7 +334,6 @@ function editGacha(id) {
 }
 
 function reset() {
-  // Sweet Alert
   Swal.fire({
     title: "Would you like to reset gacha histories?",
     text: "You will reset into empty again",
@@ -317,7 +341,6 @@ function reset() {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-
     confirmButtonText: "RESET!",
   }).then((result) => {
     if (result.isConfirmed) {
@@ -325,7 +348,7 @@ function reset() {
       resultDiv.innerHTML = "";
       historyItems = [];
       saveToLocal("localHistory", historyItems);
-      updateGachaHistories(historyItems);
+      renderGachaHistoriesPage(currentPage);
     }
   });
 }
@@ -333,15 +356,12 @@ function reset() {
 function search() {
   let inputSearch = document.getElementById("searchBar");
 
-  let result = [];
-
-  result = gachaItems.filter((gachaItem) =>
+  let result = gachaItems.filter((gachaItem) =>
     gachaItem.nama.toLowerCase().includes(inputSearch.value.toLowerCase())
   );
 
   renderGachaItem(result);
   inputSearch.value = "";
-  console.log(result);
 }
 
 function updateBalance() {
@@ -349,11 +369,9 @@ function updateBalance() {
   document.getElementById("balance").textContent = balance;
 }
 
-/// render gacha item \\\
 renderGachaItem(gachaItems);
-updateGachaHistories(historyItems);
+renderGachaHistoriesPage(currentPage);
 
-/// button di index \\\
 let gachaButton = document.getElementById("gachaButton");
 gachaButton.addEventListener("click", gacha);
 let gacha10Button = document.getElementById("gacha10Button");
@@ -363,12 +381,9 @@ addItemButton.addEventListener("click", addNewGacha);
 let resetButton = document.getElementById("resetButton");
 resetButton.addEventListener("click", reset);
 
-// click top up
 let topUpButton = document.getElementById("topUpButton");
 topUpButton.addEventListener("click", function () {
   window.location.href = "topup-credit.html";
 });
 
-// update balance real time
 updateBalance();
-
