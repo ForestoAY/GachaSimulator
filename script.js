@@ -57,7 +57,7 @@ function renderGachaItem(array) {
       </div>
       <div class="card-text">
         <p>${nama}</p>
-        <p>${rate}</p>
+        <p>${rate}%</p>
       </div>
     </div>`;
   }
@@ -78,7 +78,7 @@ function gacha() {
         historyItems.unshift(gachaItem);
         let resultDiv = document.getElementById("result");
         resultDiv.innerHTML = "";
-        resultDiv.innerHTML = `<img src="${gachaItem.linkGambar}" style="width: 20%; height: 20%" alt="${gachaItem.nama}" />
+        resultDiv.innerHTML = `<img src="${gachaItem.linkGambar}" style="width: 200px; height: 200px" alt="${gachaItem.nama}" />
       <div class="description">You got ${gachaItem.nama}</div>`;
         updateGachaHistories(historyItems);
         return;
@@ -117,14 +117,32 @@ function updateGachaHistories(array) {
       </div>
       <div class="card-text">
         <p>${nama}</p>
-        <p>${rate}</p>
+        <p>${frame.toUpperCase()}</p>
       </div>
     </div>`;
   }
 }
 
+function addNewGacha(){
+  const newItemName = document.getElementById("newItemName");
+  const newItemRate = document.getElementById("newItemRate");
+  const newItemLink = document.getElementById("newItemLink");
+  let itemName = newItemName.value.trim();
+  let itemRate = Number(newItemRate.value.trim());
+  let itemLink = newItemLink.value.trim();
+  if (itemName && !isNaN(itemRate) && itemRate > 0 && itemRate <= 100) {
+    gachaItems.push({ nama: itemName, rate: itemRate, linkGambar: itemLink});
+    newItemName.value = "";
+    newItemRate.value = "";
+    newItemLink.value = "";
+    renderGachaItem(gachaItems);
+  }
+}
+
 let gachaButton = document.getElementById("gachaButton");
 gachaButton.addEventListener("click", gacha);
+let addItemButton = document.getElementById("addItemButton");
+addItemButton.addEventListener("click", addNewGacha);
 
 // click top up
 let topUpButton = document.getElementById("topUpButton");
