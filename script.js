@@ -68,17 +68,18 @@ renderGachaItem(gachaItems);
 function gacha() {
   console.log("a");
   if (gachaItems.length > 0) {
-    let totalRate = gachaItems.reduce((sum, gachaItem) => sum + gachaItem.rate, 0);
+    let totalRate = gachaItems.reduce(
+      (sum, gachaItem) => sum + gachaItem.rate,
+      0
+    );
     let randomNum = Math.random() * totalRate;
     for (let gachaItem of gachaItems) {
       if (randomNum < gachaItem.rate) {
         historyItems.unshift(gachaItem);
         let resultDiv = document.getElementById("result");
-        resultDiv.querySelector("img").src = gachaItem.linkGambar;
-        resultDiv.querySelector(
-          ".description"
-        ).innerText = `You got: ${gachaItem.nama}`;
-        resultDiv.style.display = "block";
+        resultDiv.innerHTML = "";
+        resultDiv.innerHTML = `<img src="${gachaItem.linkGambar}" style="width: 20%; height: 20%" alt="${gachaItem.nama}" />
+      <div class="description">You got ${gachaItem.nama}</div>`;
         updateGachaHistories(historyItems);
         return;
       }
@@ -87,7 +88,6 @@ function gacha() {
   } else {
     let resultDiv = document.getElementById("result");
     resultDiv.querySelector(".description").innerText = "No items available!";
-    resultDiv.style.display = "block";
   }
 }
 
@@ -128,6 +128,6 @@ gachaButton.addEventListener("click", gacha);
 
 // click top up
 let topUpButton = document.getElementById("topUpButton");
-topUpButton.addEventListener("click", function() {
+topUpButton.addEventListener("click", function () {
   window.location.href = "topup-credit.html";
 });
