@@ -153,7 +153,7 @@ function gacha() {
 
 function gacha10() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
-  const gachaCost = 10 * 10; // biaya 10x gacha
+  const gachaCost = 10 * 50; // biaya 10x gacha
 
   if (balance < gachaCost) {
     Swal.fire({
@@ -165,7 +165,7 @@ function gacha10() {
     return;
   }
 
-  // Deduct credits before performing gacha
+  // minus credits before  gacha
   balance -= gachaCost;
   localStorage.setItem("balance", balance);
   updateBalance();
@@ -202,38 +202,6 @@ function gacha10() {
   } else {
     let resultDiv = document.getElementById("result");
     resultDiv.querySelector(".description").innerText = "No items available!";
-  }
-}
-
-function updateGachaHistories(array) {
-  let gachaHistories = document.getElementById("gachaHistories");
-  gachaHistories.innerHTML = "";
-
-  for (let i = 0; i < array.length; i++) {
-    let perItem = array[i];
-    let frame;
-    let { nama, rate, linkGambar, id } = perItem;
-
-    if (rate >= 30) {
-      frame = "common";
-    } else if (rate >= 10) {
-      frame = "rare";
-    } else if (rate > 2) {
-      frame = "sr";
-    } else if (rate <= 2) {
-      frame = "ssr";
-    }
-
-    gachaHistories.innerHTML += `
-    <div class="kartu ${frame}" style="width: 10rem;">
-      <div class="gambar">
-        <img src="${linkGambar}" class="card-img-top" alt="${nama}">
-      </div>
-      <div class="card-text">
-        <p>${nama}</p>
-        <p>${frame.toUpperCase()}</p>
-      </div>
-    </div>`;
   }
 }
 
