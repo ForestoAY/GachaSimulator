@@ -30,6 +30,14 @@ h2 {
   justify-content: center;
 }
 
+.container-history {
+  display: flex;
+}
+
+.container-history button {
+  margin-left: 1rem;
+}
+
 .description {
   align-self: center;
   margin-left: 2rem;

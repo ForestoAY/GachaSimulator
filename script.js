@@ -168,7 +168,7 @@ function addNewGacha() {
 }
 
 function deleteGacha(id) {
-  alert(`Would you like to delete ${gachaItems[id - 1].nama}?`)
+  alert(`Would you like to delete ${gachaItems[id - 1].nama}?`);
   gachaItems.splice(id - 1, 1);
   renderGachaItem(gachaItems);
 }
@@ -185,6 +185,12 @@ function editGacha(id) {
   }
 }
 
+function reset() {
+  alert(`Would you like to reset gacha histories?`);
+  historyItems = [];
+  updateGachaHistories(historyItems);
+}
+
 /// render gacha item \\\
 renderGachaItem(gachaItems);
 
@@ -193,6 +199,8 @@ let gachaButton = document.getElementById("gachaButton");
 gachaButton.addEventListener("click", gacha);
 let addItemButton = document.getElementById("addItemButton");
 addItemButton.addEventListener("click", addNewGacha);
+let resetButton = document.getElementById("resetButton");
+resetButton.addEventListener("click", reset);
 
 // click top up
 let topUpButton = document.getElementById("topUpButton");
