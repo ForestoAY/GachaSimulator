@@ -16,15 +16,25 @@
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand">Gacha Simulator</a>
-        <form class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search History"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div class="d-flex">
+          <div class="input-group mx-2">
+            <input
+            id="searchBar"
+              type="text"
+              class="form-control"
+              placeholder="Search Gacha List"
+              aria-label="Search"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          <button
+            onclick="search()"
+            class="btn btn-outline-success"
+            type="submit"
+          >
+            Search
+          </button>
+        </div>
       </div>
     </nav>
 
