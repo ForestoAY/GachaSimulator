@@ -84,6 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  const audio = document.getElementById('backgroundMusic');
+  const audio = document.getElementById('backgroundMusic').volume = 0.2;
 
   
