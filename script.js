@@ -44,7 +44,7 @@ function renderGachaItem(array) {
       frame = "common";
     } else if (rate >= 20) {
       frame = "rare";
-    } else if (rate >= 8) {
+    } else if (rate >= 8 && rate > 2) {
       frame = "sr";
     } else if (rate <= 2) {
       frame = "ssr";
@@ -59,11 +59,13 @@ function renderGachaItem(array) {
         <p>${nama}</p>
         <p>${rate}%</p>
       </div>
+      <div class="edit-delete">
+        <button class="btn btn-sm btn-warning me-2" onclick="editGacha(${id})">Edit</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteGacha(${id})">Delete</button>
+      </div>
     </div>`;
   }
 }
-
-renderGachaItem(gachaItems);
 
 function gacha() {
   console.log("a");
@@ -104,7 +106,7 @@ function updateGachaHistories(array) {
       frame = "common";
     } else if (rate >= 20) {
       frame = "rare";
-    } else if (rate >= 8) {
+    } else if (rate >= 8 && rate > 2) {
       frame = "sr";
     } else if (rate <= 2) {
       frame = "ssr";
@@ -137,14 +139,41 @@ function addNewGacha() {
     itemRate <= 100 &&
     itemLink
   ) {
-    gachaItems.push({ nama: itemName, rate: itemRate, linkGambar: itemLink });
+    gachaItems.push({
+      nama: itemName,
+      rate: itemRate,
+      linkGambar: itemLink,
+      id: gachaItems.length + 1,
+    });
     newItemName.value = "";
     newItemRate.value = "";
     newItemLink.value = "";
     renderGachaItem(gachaItems);
+    console.log(gachaItems);
   }
 }
 
+function deleteGacha(id) {
+  gachaItems.splice(id - 1, 1);
+  renderGachaItem(gachaItems);
+}
+
+function editGacha(id) {
+  const newName = prompt("Enter new name:", gachaItems[id - 1].nama);
+  const newRate = prompt("Enter new rate (1-100):", gachaItems[id - 1].rate);
+  const newLink = prompt("Enter new link", gachaItems[id - 1].linkGambar);
+  if (newName && newRate && !isNaN(newRate) && newRate > 0 && newRate <= 100) {
+    gachaItems[id - 1].nama = newName;
+    gachaItems[id - 1].rate = Number(newRate);
+    gachaItems[id - 1].linkGambar = newLink;
+    renderGachaItem(gachaItems);
+  }
+}
+
+/// render gacha item \\\
+renderGachaItem(gachaItems);
+
+/// button di index \\\
 let gachaButton = document.getElementById("gachaButton");
 gachaButton.addEventListener("click", gacha);
 let addItemButton = document.getElementById("addItemButton");
