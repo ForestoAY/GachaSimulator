@@ -4,6 +4,27 @@
   justify-content: space-evenly;
 }
 
+h2 {
+  margin-left: 4rem;
+}
+
+#addItem {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  border: 2px solid black;
+  border-radius: 20px;
+  width: 50%;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#addItem h2{
+  text-align: center;
+}
+
+#addItemButton {
+  margin-bottom: 1rem;
+}
+
 #result {
   display: flex;
   justify-content: center;
