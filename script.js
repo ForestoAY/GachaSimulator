@@ -1,5 +1,4 @@
-
-                    function saveToLocal(key, array) {
+function saveToLocal(key, array) {
   localStorage.setItem(key, JSON.stringify(array));
 }
 
