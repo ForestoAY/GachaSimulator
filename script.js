@@ -1,31 +1,45 @@
 let gachaItems = [
   {
     nama: "Caterpie",
-    rate: 70,
+    rate: 40,
     linkGambar:
       "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892132-010caterpie.png",
     id: 1,
+  },
+  {
+    nama: "Pidgey",
+    rate: 40,
+    linkGambar:
+      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1891631-016pidgey.png",
+    id: 2,
   },
   {
     nama: "Ponyta",
     rate: 20,
     linkGambar:
       "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892309-077ponyta.png",
-    id: 2,
+    id: 3,
   },
   {
     nama: "Voltorb",
     rate: 8,
     linkGambar:
       "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892678-100voltorb.png",
-    id: 3,
+    id: 4,
   },
   {
     nama: "Lapras",
     rate: 2,
     linkGambar:
       "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1891870-131lapras.png",
-    id: 4,
+    id: 5,
+  },
+  {
+    nama: "Pikachu",
+    rate: 1,
+    linkGambar:
+      "https://www.giantbomb.com/a/uploads/scale_small/0/6087/2437349-pikachu.png",
+    id: 6,
   },
 ];
 
@@ -40,11 +54,11 @@ function renderGachaItem(array) {
     let frame;
     let { nama, rate, linkGambar, id } = perItem;
 
-    if (rate >= 70) {
+    if (rate >= 30) {
       frame = "common";
-    } else if (rate >= 20) {
+    } else if (rate >= 10) {
       frame = "rare";
-    } else if (rate >= 8 && rate > 2) {
+    } else if (rate > 2) {
       frame = "sr";
     } else if (rate <= 2) {
       frame = "ssr";
@@ -53,7 +67,7 @@ function renderGachaItem(array) {
     gachaList.innerHTML += `
     <div class="kartu ${frame}" style="width: 10rem;">
       <div class="gambar">
-        <img src="${linkGambar}" class="card-img-top" alt="${nama}">
+        <img src="${linkGambar}" style="width: 144px; height: 144px" class="card-img-top" alt="${nama}">
       </div>
       <div class="card-text">
         <p>${nama}</p>
@@ -102,11 +116,11 @@ function updateGachaHistories(array) {
     let frame;
     let { nama, rate, linkGambar, id } = perItem;
 
-    if (rate >= 70) {
+    if (rate >= 30) {
       frame = "common";
-    } else if (rate >= 20) {
+    } else if (rate >= 10) {
       frame = "rare";
-    } else if (rate >= 8 && rate > 2) {
+    } else if (rate > 2) {
       frame = "sr";
     } else if (rate <= 2) {
       frame = "ssr";
