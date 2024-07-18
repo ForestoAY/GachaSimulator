@@ -126,6 +126,11 @@ h2 {
 
 
 /* Untuk page TopUp */
+.balance-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
 .container-topup {
   background: #ffffff;
   padding: 20px;
