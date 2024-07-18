@@ -11,6 +11,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--framework untuk sweetalert-->
   </head>
   <body>
     <nav class="navbar navbar-dark bg-dark">
@@ -27,6 +28,11 @@
         </form>
       </div>
     </nav>
+
+    <div class="balance-container">
+      <h2>Current Balance: <span id="balance">0</span> Credits</h2>
+    </div>
+
     <div class="container-topup mt-4">
       <h2>Top Up Credit</h2>
       <div id="topupSection">
