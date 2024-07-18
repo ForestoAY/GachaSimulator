@@ -1,3 +1,7 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
 .flex {
   display: flex;
   flex-wrap: wrap;
@@ -7,6 +11,7 @@
 body {
   display: flex;
   flex-direction: column;
+  padding-top: 5rem;
 }
 
 h2 {
@@ -20,12 +25,12 @@ h2 {
 #gachaButton {
   margin: 2rem auto;
   font-size: 2rem;
+  font-family: "Montserrat", sans-serif;
 }
 
 #addItem {
   margin-top: 3rem;
   margin-bottom: 3rem;
-  border: 2px solid black;
   border-radius: 20px;
   width: 50%;
   box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
@@ -99,6 +104,7 @@ h2 {
 .common .card-text p {
   text-align: center;
   color: white;
+  
 }
 
 .rare {
