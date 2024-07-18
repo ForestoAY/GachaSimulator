@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (selectedValue) {
         alert(`Topup successful! You have added ${selectedValue} credits.`);
         // tinggal tambahin proses buat nambahin value nya
+        window.location.href = "index.html"; // balik ke main page
       } else {
         alert("Please select a topup card first.");
       }
