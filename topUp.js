@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (selectedValue) {
         let topupAmount = parseInt(selectedValue);
         let newBalance = balance + topupAmount;
+        let topUpHistory =  JSON.parse(localStorage.getItem("topUpHistory")) || [];
+        topUpHistory.push({ amount: topupAmount, date: new Date() });
+        localStorage.setItem("topUpHistory", JSON.stringify(topUpHistory));
   
         // warning kelipatan 2500 CREDIT
         if (Math.floor(balance / 2500) < Math.floor(newBalance / 2500)) {
