@@ -1,3 +1,4 @@
+const audio = document.getElementById('backgroundMusic').volume = 0.2;
 document.addEventListener("DOMContentLoaded", function () {
     let balanceId = document.getElementById("balance");
     let topupCards = document.getElementsByClassName("card-topup");
@@ -86,7 +87,4 @@ document.addEventListener("DOMContentLoaded", function () {
       balanceId.textContent = balance;
     }
   });
-
-  const audio = document.getElementById('backgroundMusic').volume = 0.2;
-
   

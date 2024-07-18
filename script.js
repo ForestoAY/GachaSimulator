@@ -49,7 +49,7 @@ function renderGachaItem(array) {
 // spending per gacha. change here
 function gacha() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
-  const gachaCost = 10; // change gacha cost here
+  const gachaCost = 50; // change gacha cost here
 
   if (balance < gachaCost) {
     Swal.fire({
