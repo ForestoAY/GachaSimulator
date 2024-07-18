@@ -96,7 +96,7 @@ function gacha() {
     return;
   }
 
-  // minus credit each time before gacha
+  // Deduct credits before performing gacha
   balance -= gachaCost;
   localStorage.setItem("balance", balance);
   updateBalance();
@@ -188,7 +188,7 @@ function addNewGacha() {
 function deleteGacha(id) {
   // Sweet Alert
   Swal.fire({
-    title: `Would you like to delete ${gachaItems[id - 1].nama}?`,
+    title: `Would you like to delete ${gachaItems.find(item => item.id === id).nama}?`,
     text: `Are you sure?`,
     icon: "warning",
     showCancelButton: true,
@@ -197,14 +197,15 @@ function deleteGacha(id) {
     confirmButtonText: "Yes, Delete it!"
   }).then((result) => {
     if (result.isConfirmed) {
-      gachaItems.splice(id - 1, 1);
+      const index = gachaItems.findIndex(item => item.id === id);
+      gachaItems.splice(index, 1);
       renderGachaItem(gachaItems);
     }
   });
 }
 
 function editGacha(id) {
-  const item = gachaItems[id - 1];
+  const item = gachaItems.find(item => item.id === id);
 
   Swal.fire({
     title: 'Enter new name:',
