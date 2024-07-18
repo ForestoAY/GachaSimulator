@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             for (let j = 0; j < topupCards.length; j++) {
                 topupCards[j].classList.remove("selected");
             }
-
+             // nambahin selected class waktu card nya diclick
             this.classList.add("selected");
   
             selectedValue = this.getAttribute("data-value");
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (newTotal >= nextWarningThreshold && totalTopUp < nextWarningThreshold) {
                 Swal.fire({
                     title: 'Warning!',
-                    text: `Your total top-up amount will exceed ${nextWarningThreshold} credits. Do you want to continue?`,
+                    text: `Your total top-up amount will reach ${nextWarningThreshold} credits. Do you want to continue?`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Yes, continue',
