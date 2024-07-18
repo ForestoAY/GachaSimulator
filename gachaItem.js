@@ -1,4 +1,7 @@
+const audio = document.getElementById('backgroundMusic');
+
 let gachaItems = [
+
   {
     nama: "Caterpie",
     rate: 40,
@@ -44,3 +47,4 @@ let gachaItems = [
 ];
 
 let historyItems = [];
+

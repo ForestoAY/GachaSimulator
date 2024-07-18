@@ -170,6 +170,7 @@ function deleteGacha(id) {
       renderGachaItem(gachaItems);
     }
   });
+
 }
 
 function editGacha(id) {
@@ -260,6 +261,7 @@ function reset() {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
+
     confirmButtonText: "RESET!",
   }).then((result) => {
     if (result.isConfirmed) {
@@ -309,5 +311,25 @@ topUpButton.addEventListener("click", function () {
   window.location.href = "topup-credit.html";
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+
+  const img = document.createElement('img');
+  img.src = 'https://example.com/path/to/your/image.jpg'; 
+ 
+  document.getElementById('image-container');
+
+  const backgrounds = [
+      'url(https://wallpapercave.com/wp/wp7372810.jpg)',/** ini per diganti il */
+      'url(https://wallpaper.dog/large/20469146.jpg)',
+      'url(https://wallpapers.com/images/high/bo-shin-chan-cartoon-iasi7hjx7dn7ss6w.jpg)'
+  ];
+
+  const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+
+  document.body.style.backgroundImage = randomBackground;
+  document.body.style.backgroundSize = 'cover';
+});
+
 // update balance real time
 updateBalance();
+
