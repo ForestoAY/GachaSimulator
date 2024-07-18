@@ -68,11 +68,6 @@ h2 {
   background-color: grey;
 }
 
-.common img {
-  width: 95%;
-  height: 100%;
-}
-
 .common .card-text p {
   text-align: center;
   color: white;
@@ -80,11 +75,6 @@ h2 {
 
 .rare {
   background-color: rgb(51, 51, 241);
-}
-
-.rare img {
-  width: 95%;
-  height: 100%;
 }
 
 .rare .card-text p {
@@ -96,11 +86,6 @@ h2 {
   background-color: purple;
 }
 
-.sr img {
-  width: 95%;
-  height: 100%;
-}
-
 .sr .card-text p {
   text-align: center;
   color: white;
@@ -108,11 +93,6 @@ h2 {
 
 .ssr {
   background-color: orange;
-}
-
-.ssr img {
-  width: 95%;
-  height: 100%;
 }
 
 .ssr .card-text p {
