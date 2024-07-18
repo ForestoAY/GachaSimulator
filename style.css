@@ -32,7 +32,7 @@
 }
 
 .common {
-  background-color:grey;
+  background-color: grey;
 }
 
 .common img {
@@ -40,9 +40,9 @@
   height: 100%;
 }
 
-.common .card-text p{
+.common .card-text p {
   text-align: center;
-  color: white
+  color: white;
 }
 
 .rare {
@@ -56,7 +56,7 @@
 
 .rare .card-text p {
   text-align: center;
-  color: white
+  color: white;
 }
 
 .sr {
@@ -70,7 +70,7 @@
 
 .sr .card-text p {
   text-align: center;
-  color: white
+  color: white;
 }
 
 .ssr {
@@ -84,17 +84,19 @@
 
 .ssr .card-text p {
   text-align: center;
-  color: black
+  color: black;
 }
 
+
 /* Untuk page TopUp */
-.container-topup{
+.container-topup {
   background: #ffffff;
   padding: 20px;
-  margin: 100px 250px ;
+  margin: 0 auto;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  width: 75%;
+  width: 100%;
+  max-width: 600px;
   text-align: center;
 }
 
@@ -103,12 +105,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
 }
 
 .card-topup {
-  width: 25%;
+  width: 45%;
   padding: 25px;
-  margin: 10px 25px 10px 25px;
+  margin: 10px;
   border: 2px solid #0d6efd;
   border-radius: 10px;
   text-align: center;
@@ -131,20 +134,51 @@
   border-color: #0d6efd;
 }
 
-#topupBtn {
-  display: inline-block;
+.button-container {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-common {
+  display: inline-block;
+  width: 45%;
   padding: 12px 20px;
   border: none;
-  background-color: #082047;
-  color: white;
-  border-radius: 30px;
+  color: white !important;
+  border-radius: 30px !important; /*force*/
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 20px;
+  margin: 10px;
+}
+
+#topupBtn {
+  background-color: #0d6efd;
 }
 
 #topupBtn:hover {
-  background-color: #0d6efd;
+  background-color: #0b5ed7;
+}
+
+.btn-cancel {
+  background-color: #dc3545;
+}
+
+.btn-cancel:hover {
+  background-color: #c82333;
 }
 /* Untuk page TopUp */
+
+
+/* #topupBtn{
+  display: inline-block;
+  width: 45%;
+  padding: 12px 20px;
+  border: none;
+  color: white !important;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+} */
