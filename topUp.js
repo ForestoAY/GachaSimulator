@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let topupAmount = parseInt(selectedValue);
         let newBalance = balance + topupAmount;
   
-        // warning kelipatan 5000 CREDIT
-        if (Math.floor(balance / 5000) < Math.floor(newBalance / 5000)) {
+        // warning kelipatan 2500 CREDIT
+        if (Math.floor(balance / 2500) < Math.floor(newBalance / 2500)) {
           Swal.fire({
             title: 'WARNING!',
             text: `You have exceed ${newBalance} Credits. Do you want to continue?`,
