@@ -11,19 +11,24 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--framework untuk sweetalert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--framework untuk sweetalert-->
   </head>
   <body>
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand">Gacha Simulator</a>
         <div class="balance-container">
-          <h6>Balance: <span id="balance">0</span> Credits</h6>
+          <img src="./assets/coin.png" alt="Credits"><span id="balance">0</span>
         </div>
         <div class="d-flex">
+          <!-- top up button di main page -->
+          <button type="button" class="btn btn-primary" id="topUpButton">
+            Top Up
+          </button>
           <div class="input-group mx-2">
             <input
-            id="searchBar"
+              id="searchBar"
               type="text"
               class="form-control"
               placeholder="Search Gacha List"
@@ -44,10 +49,6 @@
 
     <button type="button" class="btn btn-success" id="gachaButton">
       GACHA
-    </button>
-    <!-- top up button di main page -->
-    <button type="button" class="btn btn-primary" id="topUpButton">
-      Top Up
     </button>
 
     <div class="container" id="result">
