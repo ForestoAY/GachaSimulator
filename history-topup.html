@@ -35,8 +35,9 @@
       document.addEventListener("DOMContentLoaded", function () {
         const historyList = document.getElementById("historyList");
         const topUpHistory = JSON.parse(localStorage.getItem("topUpHistory")) || [];
-        
-        topUpHistory.forEach((record, index) => {
+
+        for (let index = 0; index < topUpHistory.length; index++) {
+          const record = topUpHistory[index];
           const listItem = document.createElement("li");
           listItem.className = "list-group-item";
           listItem.innerHTML = `
@@ -44,7 +45,7 @@
             <span class="date-time">on <span class="bold">${new Date(record.date).toLocaleString()}</span></span>
           `;
           historyList.appendChild(listItem);
-        });
+        }
       });
     </script>
   </body>
