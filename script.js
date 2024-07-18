@@ -10,7 +10,7 @@ function loadFromLocal(key) {
 let gachaItems = loadFromLocal("localGacha");
 let historyItems = loadFromLocal("localHistory");
 
-const itemsPerPage = 6; // change history per page here
+const itemsPerPage = 6; // Change history per page here
 let currentPage = 1;
 
 function renderGachaItem(array) {
@@ -49,7 +49,7 @@ function renderGachaItem(array) {
   }
 }
 
-function renderGachaHistoriesPage(page) { // gacha history page from here
+function renderGachaHistoriesPage(page) {
   const start = (page - 1) * itemsPerPage;
   const end = start + itemsPerPage;
   const pageItems = historyItems.slice(start, end);
@@ -111,10 +111,10 @@ function updateGachaHistories(array) {
   renderGachaHistoriesPage(currentPage);
 }
 
-// gacha cost
+// Gacha cost
 function gacha() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
-  const gachaCost = 50; // change gacha cost here
+  const gachaCost = 50; // Change gacha cost here
 
   if (balance < gachaCost) {
     Swal.fire({
@@ -153,7 +153,7 @@ function gacha() {
 
 function gacha10() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
-  const gachaCost = 10 * 50; // biaya 10x gacha
+  const gachaCost = 10 * 50; // Biaya 10x gacha
 
   if (balance < gachaCost) {
     Swal.fire({
@@ -165,7 +165,7 @@ function gacha10() {
     return;
   }
 
-  // minus credits before  gacha
+  // Minus credits before gacha
   balance -= gachaCost;
   localStorage.setItem("balance", balance);
   updateBalance();
@@ -348,6 +348,7 @@ function reset() {
       resultDiv.innerHTML = "";
       historyItems = [];
       saveToLocal("localHistory", historyItems);
+      currentPage = 1; // reset page to 1 after press reset
       renderGachaHistoriesPage(currentPage);
     }
   });
