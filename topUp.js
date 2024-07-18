@@ -23,28 +23,63 @@ document.addEventListener("DOMContentLoaded", function () {
     topupButton.addEventListener("click", function () {
       if (selectedValue) {
         let topupAmount = parseInt(selectedValue);
-        balance += topupAmount;
-        localStorage.setItem("balance", balance);
-        updateBalance();
-
-        Swal.fire({
-          title: 'Top-Up successful!',
-          text: `You have added ${selectedValue} credits.`,
-          icon: 'success',
-          confirmButtonText: 'OK'
-      }).then(() => {
-          window.location.href = "index.html";// balik ke main page
-      });
+        let newBalance = balance + topupAmount;
+  
+        // warning kelipatan 5000 CREDIT
+        if (Math.floor(balance / 5000) < Math.floor(newBalance / 5000)) {
+          Swal.fire({
+            title: 'WARNING!',
+            text: `You have exceed ${newBalance} Credits. Do you want to continue?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, continue',
+            cancelButtonText: 'No, cancel'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              balance = newBalance;
+              localStorage.setItem("balance", balance);
+              updateBalance();
+              Swal.fire({
+                title: 'Top-Up successful!',
+                text: `You have added ${selectedValue} credits.`,
+                icon: 'success',
+                confirmButtonText: 'OK'
+              }).then(() => {
+                window.location.href = "index.html";
+              });
+            } else {
+              Swal.fire({
+                title: 'Top-Up cancelled!',
+                text: 'Your top-up has been cancelled.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+              });
+            }
+          });
+        } else {
+          balance = newBalance;
+          localStorage.setItem("balance", balance);
+          updateBalance();
+          Swal.fire({
+            title: 'Top-Up successful!',
+            text: `You have added ${selectedValue} credits.`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            window.location.href = "index.html";
+          });
+        }
       } else {
         Swal.fire({
           title: 'Error!',
-          text: 'Please select a topup card first.',
+          text: 'Please select a top-up card first.',
           icon: 'error',
           confirmButtonText: 'OK'
-      });
+        });
       }
     });
-    function updateBalance(){
+  
+    function updateBalance() {
       balanceId.textContent = balance;
     }
   });
