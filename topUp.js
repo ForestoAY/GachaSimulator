@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
         topUpHistory.push({ amount: topupAmount, date: new Date() });
         localStorage.setItem("topUpHistory", JSON.stringify(topUpHistory));
   
-        // warning kelipatan 2500 CREDIT
-        if (Math.floor(balance / 2500) < Math.floor(newBalance / 2500)) {
+        // warning kelipatan 3500 CREDIT
+        if (Math.floor(balance / 3500) < Math.floor(newBalance / 3500)) {
           Swal.fire({
             title: 'WARNING!',
             text: `You have exceed ${newBalance} Credits. Do you want to continue?`,
