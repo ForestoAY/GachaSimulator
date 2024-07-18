@@ -1,4 +1,4 @@
-const audio = document.getElementById('backgroundMusic');
+const audio = document.getElementById('backgroundMusic').volume = 0.1;
 
 let gachaItems = [
 
