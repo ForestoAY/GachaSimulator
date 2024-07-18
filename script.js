@@ -10,7 +10,7 @@ function loadFromLocal(key) {
 let gachaItems = loadFromLocal("localGacha");
 let historyItems = loadFromLocal("localHistory");
 
-const itemsPerPage = 6; // Change history per page here
+const itemsPerPage = 6; // change history per page here
 let currentPage = 1;
 
 function renderGachaItem(array) {
@@ -111,10 +111,10 @@ function updateGachaHistories(array) {
   renderGachaHistoriesPage(currentPage);
 }
 
-// Gacha cost
+// gacha cost
 function gacha() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
-  const gachaCost = 50; // Change gacha cost here
+  const gachaCost = 50; // change gacha cost here
 
   if (balance < gachaCost) {
     Swal.fire({
@@ -151,9 +151,13 @@ function gacha() {
   }
 }
 
-function gacha10() {
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function gacha10() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
-  const gachaCost = 10 * 50; // Biaya 10x gacha
+  const gachaCost = 10 * 50; // cost of 10x gacha
 
   if (balance < gachaCost) {
     Swal.fire({
@@ -165,43 +169,29 @@ function gacha10() {
     return;
   }
 
-  // Minus credits before gacha
+  // check credits before gacha
   balance -= gachaCost;
   localStorage.setItem("balance", balance);
   updateBalance();
 
-  let results = [];
   for (let i = 0; i < 10; i++) {
     if (gachaItems.length > 0) {
-      let totalRate = gachaItems.reduce(
-        (sum, gachaItem) => sum + gachaItem.rate,
-        0
-      );
+      let totalRate = gachaItems.reduce((sum, gachaItem) => sum + gachaItem.rate, 0);
       let randomNum = Math.random() * totalRate;
+
       for (let gachaItem of gachaItems) {
         if (randomNum < gachaItem.rate) {
-          results.push(gachaItem);
           historyItems.unshift(gachaItem);
+          let resultDiv = document.getElementById("result");
+          resultDiv.innerHTML = `<img src="${gachaItem.linkGambar}" style="width: 200px; height: 200px" alt="${gachaItem.nama}" />
+          <div class="description">You got ${gachaItem.nama}</div>`;
+          updateGachaHistories(historyItems);
+          await delay(500); // set delay between gachas
           break;
         }
         randomNum -= gachaItem.rate;
       }
     }
-  }
-
-  if (results.length > 0) {
-    let resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "";
-    results.forEach((item) => {
-      resultDiv.innerHTML += `
-        <img src="${item.linkGambar}" style="width: 100px; height: 100px" alt="${item.nama}" />
-        <div class="description">${item.nama}</div>`;
-    });
-    saveToLocal("localHistory", historyItems);
-    updateGachaHistories(historyItems);
-  } else {
-    let resultDiv = document.getElementById("result");
-    resultDiv.querySelector(".description").innerText = "No items available!";
   }
 }
 
@@ -348,7 +338,7 @@ function reset() {
       resultDiv.innerHTML = "";
       historyItems = [];
       saveToLocal("localHistory", historyItems);
-      currentPage = 1; // reset page to 1 after press reset
+      currentPage = 1; // reset the current page to 1
       renderGachaHistoriesPage(currentPage);
     }
   });
