@@ -291,6 +291,7 @@ function updateBalance() {
 
 /// render gacha item \\\
 renderGachaItem(gachaItems);
+updateGachaHistories(historyItems);
 
 /// button di index \\\
 let gachaButton = document.getElementById("gachaButton");
