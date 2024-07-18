@@ -49,7 +49,7 @@ function renderGachaItem(array) {
 // spending per gacha. change here
 function gacha() {
   let balance = parseInt(localStorage.getItem("balance")) || 0;
-  const gachaCost = 10; // change gacha cost here
+  const gachaCost = 50; // change gacha cost here
 
   if (balance < gachaCost) {
     Swal.fire({
@@ -311,24 +311,24 @@ topUpButton.addEventListener("click", function () {
   window.location.href = "topup-credit.html";
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', () => {
 
-  const img = document.createElement('img');
-  img.src = 'https://example.com/path/to/your/image.jpg'; 
+//   const img = document.createElement('img');
+//   img.src = 'https://example.com/path/to/your/image.jpg'; 
  
-  document.getElementById('image-container');
+//   document.getElementById('image-container');
 
-  const backgrounds = [
-      'url(https://wallpapercave.com/wp/wp7372810.jpg)',/** ini per diganti il */
-      'url(https://wallpaper.dog/large/20469146.jpg)',
-      'url(https://wallpapers.com/images/high/bo-shin-chan-cartoon-iasi7hjx7dn7ss6w.jpg)'
-  ];
+//   const backgrounds = [
+//       'url(https://wallpapercave.com/wp/wp7372810.jpg)',/** ini per diganti il */
+//       'url(https://wallpaper.dog/large/20469146.jpg)',
+//       'url(https://wallpapers.com/images/high/bo-shin-chan-cartoon-iasi7hjx7dn7ss6w.jpg)'
+//   ];
 
-  const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+//   const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
 
-  document.body.style.backgroundImage = randomBackground;
-  document.body.style.backgroundSize = 'cover';
-});
+//   document.body.style.backgroundImage = randomBackground;
+//   document.body.style.backgroundSize = 'cover';
+// });
 
 // update balance real time
 updateBalance();

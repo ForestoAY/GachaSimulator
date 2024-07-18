@@ -7,6 +7,8 @@
 body {
   display: flex;
   flex-direction: column;
+  background-color: #090947;
+  background-image: linear-gradient(315deg, #134709 0%, #5a585a 74%); 
 }
 
 h2 {
@@ -48,6 +50,7 @@ h2 {
   display: flex;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  color: white;
 }
 
 .container-history button {
