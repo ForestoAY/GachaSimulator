@@ -70,8 +70,8 @@ function renderGachaItem(array) {
         <img src="${linkGambar}" style="width: 144px; height: 144px" class="card-img-top" alt="${nama}">
       </div>
       <div class="card-text">
-        <p>${nama}</p>
-        <p>${rate}%</p>
+        <p><b>${nama}</b></p>
+        <p>${rate}</p>
       </div>
       <div class="edit-delete">
         <button class="btn btn-sm btn-warning me-2" onclick="editGacha(${id})">Edit</button>
@@ -189,6 +189,20 @@ function reset() {
   alert(`Would you like to reset gacha histories?`);
   historyItems = [];
   updateGachaHistories(historyItems);
+}
+
+function search() {
+  let inputSearch = document.getElementById("searchBar");
+
+  let result = [];
+
+  result = gachaItems.filter((gachaItem) =>
+    gachaItem.nama.toLowerCase().includes(inputSearch.value.toLowerCase())
+  );
+
+  renderGachaItem(result);
+  inputSearch.value = "";
+  console.log(result);
 }
 
 /// render gacha item \\\
