@@ -1,3 +1,5 @@
+const audio = document.getElementById('backgroundMusic');
+
 let gachaItem = [
   {
     nama: "R",
@@ -26,3 +28,7 @@ let gachaItem = [
     id: 4,
   },
 ];
+
+
+
+

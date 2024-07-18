@@ -168,9 +168,20 @@ function addNewGacha() {
 }
 
 function deleteGacha(id) {
-  alert(`Would you like to delete ${gachaItems[id - 1].nama}?`);
-  gachaItems.splice(id - 1, 1);
-  renderGachaItem(gachaItems);
+  // Sweet Alert
+  Swal.fire({
+    title: `Would you like to delete ${gachaItems[id - 1].nama}?`,
+    text: `Are you sure?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Delete it!"
+  }).then(() => {
+      gachaItems.splice(id - 1, 1);
+      renderGachaItem(gachaItems);
+  });
+  
 }
 
 function editGacha(id) {
@@ -186,9 +197,19 @@ function editGacha(id) {
 }
 
 function reset() {
-  alert(`Would you like to reset gacha histories?`);
-  historyItems = [];
-  updateGachaHistories(historyItems);
+  // Sweet Alert
+  Swal.fire({
+    title: "Would you like to reset gacha histories?",
+    text: "You will reset into empty again",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "RESET!"
+  }).then(() => {
+      historyItems = [];
+      updateGachaHistories(historyItems);
+  });
 }
 
 function search() {
@@ -221,3 +242,24 @@ let topUpButton = document.getElementById("topUpButton");
 topUpButton.addEventListener("click", function () {
   window.location.href = "topup-credit.html";
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const img = document.createElement('img');
+  img.src = 'https://example.com/path/to/your/image.jpg'; 
+ 
+  document.getElementById('image-container');
+
+  const backgrounds = [
+      'url(https://wallpapercave.com/wp/wp7372810.jpg)',/** ini per diganti il */
+      'url(https://wallpaper.dog/large/20469146.jpg)',
+      'url(https://wallpapers.com/images/high/bo-shin-chan-cartoon-iasi7hjx7dn7ss6w.jpg)'
+  ];
+
+  const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+
+  document.body.style.backgroundImage = randomBackground;
+  document.body.style.backgroundSize = 'cover';
+});
+
+
