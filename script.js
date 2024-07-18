@@ -154,6 +154,7 @@ function addNewGacha() {
 }
 
 function deleteGacha(id) {
+  alert(`Would you like to delete ${gachaItems[id - 1].nama}?`)
   gachaItems.splice(id - 1, 1);
   renderGachaItem(gachaItems);
 }
