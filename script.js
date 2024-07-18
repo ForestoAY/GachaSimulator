@@ -1,49 +1,15 @@
-let gachaItems = [
-  {
-    nama: "Caterpie",
-    rate: 40,
-    linkGambar:
-      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892132-010caterpie.png",
-    id: 1,
-  },
-  {
-    nama: "Pidgey",
-    rate: 40,
-    linkGambar:
-      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1891631-016pidgey.png",
-    id: 2,
-  },
-  {
-    nama: "Ponyta",
-    rate: 20,
-    linkGambar:
-      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892309-077ponyta.png",
-    id: 3,
-  },
-  {
-    nama: "Voltorb",
-    rate: 8,
-    linkGambar:
-      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1892678-100voltorb.png",
-    id: 4,
-  },
-  {
-    nama: "Lapras",
-    rate: 2,
-    linkGambar:
-      "https://www.giantbomb.com/a/uploads/scale_small/13/135472/1891870-131lapras.png",
-    id: 5,
-  },
-  {
-    nama: "Pikachu",
-    rate: 1,
-    linkGambar:
-      "https://www.giantbomb.com/a/uploads/scale_small/0/6087/2437349-pikachu.png",
-    id: 6,
-  },
-];
 
-let historyItems = [];
+                    function saveToLocal(key, array) {
+  localStorage.setItem(key, JSON.stringify(array));
+}
+
+function loadFromLocal(key) {
+  let data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];
+}
+
+let gachaItems = loadFromLocal("localGacha");
+let historyItems = loadFromLocal("localHistory");
 
 function renderGachaItem(array) {
   let gachaList = document.getElementById("gachaList");
@@ -82,7 +48,6 @@ function renderGachaItem(array) {
 }
 
 function gacha() {
-  console.log("a");
   if (gachaItems.length > 0) {
     let totalRate = gachaItems.reduce(
       (sum, gachaItem) => sum + gachaItem.rate,
@@ -96,6 +61,7 @@ function gacha() {
         resultDiv.innerHTML = "";
         resultDiv.innerHTML = `<img src="${gachaItem.linkGambar}" style="width: 200px; height: 200px" alt="${gachaItem.nama}" />
       <div class="description">You got ${gachaItem.nama}</div>`;
+        saveToLocal("localHistory", historyItems);
         updateGachaHistories(historyItems);
         return;
       }
@@ -163,7 +129,7 @@ function addNewGacha() {
     newItemRate.value = "";
     newItemLink.value = "";
     renderGachaItem(gachaItems);
-    console.log(gachaItems);
+    saveToLocal("localGacha", gachaItems);
   }
 }
 
@@ -176,67 +142,69 @@ function deleteGacha(id) {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, Delete it!"
+    confirmButtonText: "Yes, Delete it!",
   }).then(() => {
-      gachaItems.splice(id - 1, 1);
-      renderGachaItem(gachaItems);
+    gachaItems.splice(id - 1, 1);
+    renderGachaItem(gachaItems);
+    saveToLocal("localGacha", gachaItems);
   });
-  
 }
 
 function editGacha(id) {
   const item = gachaItems[id - 1];
 
   Swal.fire({
-    title: 'Enter new name:',
-    input: 'text',
+    title: "Enter new name:",
+    input: "text",
     inputValue: item.nama,
     showCancelButton: true,
-    confirmButtonText: 'Next',
+    confirmButtonText: "Next",
     showLoaderOnConfirm: true,
     preConfirm: (newName) => {
       if (!newName) {
-        Swal.showValidationMessage('Name is required');
+        Swal.showValidationMessage("Name is required");
         return false;
       }
       return newName;
-    }
+    },
   }).then((result) => {
     if (result.isConfirmed) {
       const newName = result.value;
 
       Swal.fire({
-        title: 'Enter new rate (1-100):',
-        input: 'number',
+        title: "Enter new rate (1-100):",
+        input: "number",
         inputValue: item.rate,
         showCancelButton: true,
-        confirmButtonText: 'Next',
+        confirmButtonText: "Next",
         showLoaderOnConfirm: true,
         preConfirm: (newRate) => {
           if (!newRate || isNaN(newRate) || newRate <= 0 || newRate > 100) {
-            Swal.showValidationMessage('Please enter a valid rate between 1 and 100');
+            Swal.showValidationMessage(
+              "Please enter a valid rate between 1 and 100"
+            );
             return false;
           }
           return newRate;
-        }
+        },
       }).then((result) => {
         if (result.isConfirmed) {
           const newRate = result.value;
 
           Swal.fire({
-            title: 'Enter new link:',
-            input: 'text',
+            title: "Enter new link:",
+            input: "text",
             inputValue: item.linkGambar,
             showCancelButton: true,
-            confirmButtonText: 'Save',
+            confirmButtonText: "Save",
             showLoaderOnConfirm: true,
             preConfirm: (newLink) => {
               if (!newLink) {
-                Swal.showValidationMessage('Link is required');
+                Swal.showValidationMessage("Link is required");
                 return false;
               }
               return newLink;
-            }
+            },
           }).then((result) => {
             if (result.isConfirmed) {
               const newLink = result.value;
@@ -248,11 +216,12 @@ function editGacha(id) {
 
               // Re-render gacha items
               renderGachaItem(gachaItems);
+              saveToLocal("localGacha", gachaItems);
 
               Swal.fire({
-                title: 'Success!',
-                text: 'Gacha item updated successfully.',
-                icon: 'success'
+                title: "Success!",
+                text: "Gacha item updated successfully.",
+                icon: "success",
               });
             }
           });
@@ -271,10 +240,11 @@ function reset() {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "RESET!"
+    confirmButtonText: "RESET!",
   }).then(() => {
-      historyItems = [];
-      updateGachaHistories(historyItems);
+    historyItems = [];
+    updateGachaHistories(historyItems);
+    saveToLocal("localHistory", historyItems);
   });
 }
 
@@ -289,11 +259,11 @@ function search() {
 
   renderGachaItem(result);
   inputSearch.value = "";
-  console.log(result);
 }
 
 /// render gacha item \\\
 renderGachaItem(gachaItems);
+updateGachaHistories(historyItems);
 
 /// button di index \\\
 let gachaButton = document.getElementById("gachaButton");
