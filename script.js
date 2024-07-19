@@ -57,7 +57,7 @@ function renderGachaHistoriesPage(page) {
   let gachaHistories = document.getElementById("gachaHistories");
   gachaHistories.innerHTML = "";
 
-  pageItems.forEach(item => {
+  pageItems.forEach((item) => {
     let frame;
     const { nama, rate, linkGambar } = item;
 
@@ -85,7 +85,7 @@ function renderGachaHistoriesPage(page) {
 function updatePaginationControls() {
   const totalPages = Math.ceil(historyItems.length / itemsPerPage);
   document.getElementById("currentPage").innerText = currentPage;
-  
+
   document.getElementById("prevPage").disabled = currentPage === 1;
   document.getElementById("nextPage").disabled = currentPage === totalPages;
 }
@@ -152,7 +152,7 @@ function gacha() {
 }
 
 function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function gacha10() {
@@ -176,7 +176,10 @@ async function gacha10() {
 
   for (let i = 0; i < 10; i++) {
     if (gachaItems.length > 0) {
-      let totalRate = gachaItems.reduce((sum, gachaItem) => sum + gachaItem.rate, 0);
+      let totalRate = gachaItems.reduce(
+        (sum, gachaItem) => sum + gachaItem.rate,
+        0
+      );
       let randomNum = Math.random() * totalRate;
 
       for (let gachaItem of gachaItems) {
@@ -218,6 +221,11 @@ function addNewGacha() {
     newItemName.value = "";
     newItemRate.value = "";
     newItemLink.value = "";
+    gachaItems.sort(function (a, b) {
+      if (a.rate < b.rate) return -1;
+      if (a.rate > b.rate) return 1;
+      return 0;
+    });
     renderGachaItem(gachaItems);
     saveToLocal("localGacha", gachaItems);
   }
@@ -307,6 +315,11 @@ function editGacha(id) {
               item.rate = Number(newRate);
               item.linkGambar = newLink;
 
+              gachaItems.sort(function (a, b) {
+                if (a.rate < b.rate) return -1;
+                if (a.rate > b.rate) return 1;
+                return 0;
+              });
               renderGachaItem(gachaItems);
               saveToLocal("localGacha", gachaItems);
 
